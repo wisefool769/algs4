@@ -27,9 +27,9 @@ public class Percolation {
         gridSize = width + 1;
         // n + 1 because indeces start at 1
         grid = new boolean[gridSize][gridSize];
-        uf = new WeightedQuickUnionUF(width * width  + 2);
+        uf = new WeightedQuickUnionUF(width * width  + width + 2);
         
-        topIdx = width * width;
+        topIdx = width * width + width;
         bottomIdx = topIdx + 1;
 
         for (int i = 1; i != gridSize; i++) {
@@ -56,10 +56,20 @@ public class Percolation {
         return ((row > 0) && (row < gridSize) && (col > 0) && (col < gridSize));
     }
     
+    private void checkBottomConnection(int r, int c){
+        if(r == width){
+            int local_bottom = width * width + c - 1;
+            uf.union(xyTo1D(r, c), local_bottom);
+            if (uf.connected(xyTo1D(r, c), topIdx))
+                uf.union(local_bottom, bottomIdx);
+        }
+    }
+    
     private void connectCells(int r1, int c1, int r2, int c2) {
         if (checkIndices(r2, c2) && isOpen(r2, c2)) {
             uf.union(xyTo1D(r1, c1), xyTo1D(r2, c2));
         }
+        
     }
     
     private void connectNeighbors(int r1, int c1) {
@@ -70,9 +80,9 @@ public class Percolation {
         if(r1 == 1){
             uf.union(xyTo1D(r1, c1), topIdx);
         }
-        if(r1 == width){
-            uf.union(xyTo1D(r1, c1), bottomIdx);
-        }
+        checkBottomConnection(r1, c1);
+        checkBottomConnection(r1 + 1, c1);
+        
     }
     
     // open site (row, col) if it is not open already

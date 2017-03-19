@@ -22,8 +22,6 @@ public class PercolationStats {
             Percolation perc = new Percolation(n);
             int[] ordering = new int[n * n];
            
-            
-
             for(int j = 0; j != n * n; j ++){
                 ordering[j] = j;
             }
@@ -32,9 +30,10 @@ public class PercolationStats {
             
             int opened = 0;
             while(!perc.percolates()){
-                int col = ordering[opened] % n;
-                int row = (ordering[opened] - col) / n;
-//                System.out.println("opening (" + row + "," + col + ")");
+                int raw_col = ordering[opened] % n;
+                int raw_row = (ordering[opened] - raw_col) / n;
+                int col = raw_col + 1;
+                int row = raw_row + 1;
                 perc.open(row, col);
                 opened ++;
             }
