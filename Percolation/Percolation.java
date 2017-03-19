@@ -27,9 +27,9 @@ public class Percolation {
         gridSize = width + 1;
         // n + 1 because indeces start at 1
         grid = new boolean[gridSize][gridSize];
-        uf = new WeightedQuickUnionUF(width * width + width + 2);
+        uf = new WeightedQuickUnionUF(width * width  + 2);
         
-        topIdx = width * width + width;
+        topIdx = width * width;
         bottomIdx = topIdx + 1;
 
         for (int i = 1; i != gridSize; i++) {
