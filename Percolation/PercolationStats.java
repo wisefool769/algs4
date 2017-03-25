@@ -65,9 +65,9 @@ public class PercolationStats {
         int n = Integer.parseInt(args[0]);
         int trials = Integer.parseInt(args[1]);
         PercolationStats ps = new PercolationStats(n, trials);
-        System.out.println("mean: " + ps.mean());
-        System.out.println("stddev: " + ps.stddev());
-        System.out.println("95% confidence interval = [" + ps.confidenceLo() 
+        System.out.println("mean \t\t= " + ps.mean());
+        System.out.println("stddev \t\t= " + ps.stddev());
+        System.out.println("95% confidence interval \t\t= [" + ps.confidenceLo() 
                           + ", " + ps.confidenceHi() + "]");
     }
     
