@@ -53,5 +53,15 @@ public class TestPoint{
         Point p3 = new Point(2, 1);
         Point p4 = new Point(2, 2);
         assertTrue(SlopeOrder.compare(p3, p4) < 0);
+        
+        //vertical line
+        Point p5 = new Point(1,3);
+        assertEquals(SlopeOrder.compare(p2, p5), 0);
+    }
+    
+    @Test
+    public void testInf(){
+        assertEquals(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, 1e-5);
+        assertEquals(Double.POSITIVE_INFINITY - Double.POSITIVE_INFINITY, 0, 1e-5);
     }
 }
